@@ -3,6 +3,7 @@ using ContactsApp.Data_Access;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ContactsApp.Migrations
 {
     [DbContext(typeof(ContactsAppContext))]
-    partial class ContactsAppContextModelSnapshot : ModelSnapshot
+    [Migration("20250625054755_Fixed_FirstName_Property_Name")]
+    partial class Fixed_FirstName_Property_Name
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
