@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using ContactsApp.Data_Access;
+using System.Windows;
 
 namespace ContactsApp;
 
@@ -7,8 +8,11 @@ namespace ContactsApp;
 /// </summary>
 public partial class MainWindow : Window
 {
-    public MainWindow()
+    private readonly ContactsAppContext _context;
+    public MainWindow(ContactsAppContext context)
     {
+        _context = context;
+        var contacts = _context.Contacts.ToList();
         InitializeComponent();
     }
 }
