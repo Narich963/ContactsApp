@@ -1,4 +1,5 @@
 ﻿using ContactsApp.Data_Access;
+using ContactsApp.ViewModels;
 using System.Windows;
 
 namespace ContactsApp;
@@ -8,11 +9,9 @@ namespace ContactsApp;
 /// </summary>
 public partial class MainWindow : Window
 {
-    private readonly ContactsAppContext _context;
-    public MainWindow(ContactsAppContext context)
+    public MainWindow(MainWindowViewModel viewModel)
     {
-        _context = context;
-        var contacts = _context.Contacts.ToList();
         InitializeComponent();
+        DataContext = viewModel;
     }
 }
