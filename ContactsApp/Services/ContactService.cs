@@ -16,7 +16,7 @@ public class ContactService : IContactService
 
     public async Task<List<Contact>> GetAll()
     {
-        return await _context.Contacts.ToListAsync();
+        return await _context.Contacts.OrderBy(c => c.FirstName).ToListAsync();
     }
 
     public async Task AddOrEditAsync(ContactViewModel contactVM)

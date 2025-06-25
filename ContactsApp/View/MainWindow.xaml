@@ -6,16 +6,48 @@
         xmlns:local="clr-namespace:ContactsApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Width"  Value="100" />
+        </Style>
+        <Style TargetType="ListViewItem">
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="1,0,1,1" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+        </Style>
+        <Style TargetType="GridViewColumnHeader">
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+    </Window.Resources>
     <Grid>
-        <ListView ItemsSource="{Binding Contacts}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding FirstName}" />
-                    <GridViewColumn Header="Last name" DisplayMemberBinding="{Binding LastName}"/>
-                    <GridViewColumn Header="Phone number" DisplayMemberBinding="{Binding PhoneNumber}"/>
-                    <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Address}"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="20 10 0 0" Width="Auto" Grid.Column="0" Grid.Row="0">
+            <Label Margin="0 0 0 10">Contact list</Label>
+            <ListView  ItemsSource="{Binding Contacts}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding FirstName}" />
+                        <GridViewColumn Header="Last name" DisplayMemberBinding="{Binding LastName}"/>
+                        <GridViewColumn Header="Phone number" DisplayMemberBinding="{Binding PhoneNumber}"/>
+                        <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Address}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+        <StackPanel Margin="0 10 0 0" Grid.Column="2" Grid.Row="0">
+            <Label HorizontalAlignment="Center" Margin="0 0 0 10">Actions</Label>
+            <Button Background="#22bb33" >Add Contact</Button>
+            <Button Background="#bb2124" Margin="0 10 0 0">Delete Contact</Button>
+        </StackPanel>
     </Grid>
 </Window>
