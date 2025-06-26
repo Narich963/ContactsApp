@@ -11,6 +11,11 @@
             <Setter Property="Margin" Value="0 10 0 0" />
             <Setter Property="Width" Value="150" /> 
         </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="10 10 10 10"/>
+            <Setter Property="Height" Value="20" />
+            <Setter Property="Width" Value="50" />
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -41,7 +46,10 @@
                 <TextBox Text="{Binding Contact.Address}" Name="AddressBox"></TextBox>
             </StackPanel>
 
-            <Button x:Name="SaveButton" Click="CreateButton_Click" Foreground="White" Margin="0 20 0 0" Height="25" Width="100"></Button>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="SaveButton" Click="CreateButton_Click"></Button>
+                <Button Click="CancelButton_Click" Background="Red">Cancel</Button>
+            </StackPanel>
         </StackPanel>
     </Grid>
 

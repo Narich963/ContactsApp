@@ -30,9 +30,9 @@
             <ColumnDefinition Width="3*"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel Margin="20 10 0 0" Width="Auto" Grid.Column="0" Grid.Row="0">
+        <StackPanel Margin="20 10 0 0" Width="Auto" Grid.Column="0" Grid.Row="0" Orientation="Vertical">
             <Label Margin="0 0 0 10">Contact list</Label>
-            <ListView ItemsSource="{Binding Contacts}" x:Name="ContactsList">
+            <ListView ItemsSource="{Binding Contacts}" x:Name="ContactsList" MaxHeight="300">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>

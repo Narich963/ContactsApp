@@ -37,4 +37,9 @@ public partial class AddOrEdit : Window
         await ((AddOrEditContactViewModel)this.DataContext).SaveAsync();
         NavigationService.NavigateBack();
     }
+
+    public void CancelButton_Click(object sender, RoutedEventArgs e)
+    {
+        NavigationService.NavigateBack();
+    }
 }
