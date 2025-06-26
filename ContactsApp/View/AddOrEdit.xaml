@@ -16,6 +16,30 @@
             <Setter Property="Height" Value="20" />
             <Setter Property="Width" Value="50" />
         </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <AdornedElementPlaceholder/>
+                            <ItemsControl ItemsSource="{Binding}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding ErrorContent}" Foreground="Red" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip" Value="{Binding (Validation.Errors)[0].ErrorContent,
+                                                        RelativeSource={RelativeSource Self}}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -28,26 +52,26 @@
             
             <StackPanel>
                 <Label Target="{Binding FirstNameBox}">First name</Label>
-                <TextBox Text="{Binding Contact.FirstName}" Name="FirstNameBox"></TextBox>
+                <TextBox Text="{Binding Contact.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Name="FirstNameBox"></TextBox>
             </StackPanel>
 
             <StackPanel>
                 <Label Target="{Binding LastNameBox}">Last name</Label>
-                <TextBox Text="{Binding Contact.LastName}" Name="LastNameBox"></TextBox>
+                <TextBox Text="{Binding Contact.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Name="LastNameBox"></TextBox>
             </StackPanel>
 
             <StackPanel>
                 <Label Target="{Binding PhoneNumberBox}">Phone number</Label>
-                <TextBox Text="{Binding Contact.PhoneNumber}"  Name="PhoneNumberBox"></TextBox>
+                <TextBox Text="{Binding Contact.PhoneNumber, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"  Name="PhoneNumberBox"></TextBox>
             </StackPanel>
 
             <StackPanel>
                 <Label Target="{Binding AddressBox}">Address</Label>
-                <TextBox Text="{Binding Contact.Address}" Name="AddressBox"></TextBox>
+                <TextBox Text="{Binding Contact.Address, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Name="AddressBox"></TextBox>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <Button x:Name="SaveButton" Click="CreateButton_Click"></Button>
+                <Button x:Name="SaveButton" Click="CreateButton_Click" IsEnabled="{Binding Contact.IsSaveButtonActive}"></Button>
                 <Button Click="CancelButton_Click" Background="Red">Cancel</Button>
             </StackPanel>
         </StackPanel>
