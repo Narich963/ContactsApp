@@ -12,7 +12,7 @@ public class Contact
     [StringLength(50)]
     public string LastName { get; set; }
 
-    [StringLength(12)]
+    [StringLength(13)]
     public string PhoneNumber { get; set; }
 
     [StringLength(50)]

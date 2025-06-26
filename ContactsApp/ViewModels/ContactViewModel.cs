@@ -49,7 +49,8 @@ public class ContactViewModel : INotifyPropertyChanged, INotifyDataErrorInfo
 
     private string phoneNumber;
     [Required]
-    [MaxLength(10, ErrorMessage = "Max length of Phone number is 10 symbols")]
+    [MaxLength(13, ErrorMessage = "Max length of Phone number is 13 symbols")]
+    [RegularExpression(@"^[\d\s]+$", ErrorMessage = "Invalid phone number format. Example: 0 123 456 789")]
     public string PhoneNumber
     {
         get => phoneNumber;
