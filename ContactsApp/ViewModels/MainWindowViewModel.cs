@@ -38,7 +38,7 @@ public class MainWindowViewModel : INotifyPropertyChanged
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Loading erro: {ex.Message}");
+            MessageBox.Show($"Loading error: {ex.Message}");
         }
     }
 

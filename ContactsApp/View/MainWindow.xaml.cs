@@ -15,6 +15,8 @@ namespace ContactsApp;
 public partial class MainWindow : Window
 {
     private readonly IContactService _contactService;
+    private const string NoSelectedContactError = "You should choose 1 contact to interact with";
+    private const string ErrorTitle = "Error!";
     public MainWindow(MainWindowViewModel viewModel, IContactService contactService)
     {
         InitializeComponent();
@@ -31,11 +33,17 @@ public partial class MainWindow : Window
             DataContext = viewModel
         };
 
-        window.ShowDialog();
+        NavigationService.NavigateTo(window);
     }
     public void EditContact_Click(object sender, RoutedEventArgs e)
     {
          var selected = ContactsList.SelectedValue as Contact;
+
+        if (selected == null)
+        {
+            MessageBox.Show(NoSelectedContactError, ErrorTitle);
+            return;
+        }
 
         var viewModel = new AddOrEditContactViewModel(_contactService);
         viewModel.Contact = new ContactViewModel
@@ -52,12 +60,16 @@ public partial class MainWindow : Window
         {
             DataContext = viewModel
         };
-        window.ShowDialog();
+        NavigationService.NavigateTo(window);
     }
     public void DeleteContact_Click(object sender, RoutedEventArgs e)
     {
         var selected = ContactsList.SelectedValue as Contact;
-
+        if (selected == null)
+        {
+            MessageBox.Show(NoSelectedContactError, ErrorTitle);
+            return;
+        }
         _contactService.DeleteAsync(selected.Id);
     }
 }

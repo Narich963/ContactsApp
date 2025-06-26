@@ -1,5 +1,5 @@
-﻿using ContactsApp.ViewModels;
-using System.Threading.Tasks;
+﻿using ContactsApp.Services;
+using ContactsApp.ViewModels;
 using System.Windows;
 using System.Windows.Media;
 
@@ -26,9 +26,15 @@ public partial class AddOrEdit : Window
             SaveButton.Background = viewModel.Contact.IsNew ? Brushes.Blue : Brushes.Yellow;
         }
     }
+    protected override void OnClosed(EventArgs e)
+    {
+        NavigationService.NavigateBack();
+        base.OnClosed(e);
+    }
 
     public void CreateButton_Click(object sender, RoutedEventArgs e)
     {
         ((AddOrEditContactViewModel)this.DataContext).SaveAsync();
+        NavigationService.NavigateBack();
     }
 }
