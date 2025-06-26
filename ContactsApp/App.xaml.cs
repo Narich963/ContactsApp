@@ -1,5 +1,6 @@
 ﻿using ContactsApp.Data_Access;
 using ContactsApp.Services;
+using ContactsApp.View;
 using ContactsApp.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,8 +22,9 @@ public partial class App : Application
 
         services.AddDbContext<ContactsAppContext>(opts => opts.UseSqlServer(ConnectionString));
         services.AddTransient<IContactService, ContactService>();
-        services.AddSingleton<MainWindow>();
-        services.AddSingleton<MainWindowViewModel>();
+        services.AddTransient<MainWindow>();
+        services.AddTransient<AddOrEdit>();
+        services.AddTransient<MainWindowViewModel>();
 
         _serviceProvider = services.BuildServiceProvider();
 

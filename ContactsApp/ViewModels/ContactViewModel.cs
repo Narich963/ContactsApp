@@ -1,12 +1,70 @@
-﻿namespace ContactsApp.ViewModels;
+﻿using System.ComponentModel;
 
-public class ContactViewModel
+namespace ContactsApp.ViewModels;
+
+public class ContactViewModel : INotifyPropertyChanged
 {
-    public int Id { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string PhoneNumber { get; set; }
-    public string Address { get; set; }
+    private int id;
+    public int Id
+    {
+        get => id;
+        set
+        {
+            id = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private string firstName;
+    public string FirstName
+    {
+        get => firstName;
+        set
+        {
+            firstName = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private string lastName;
+    public string LastName
+    {
+        get => lastName;
+        set
+        {
+            lastName = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private string phoneNumber;
+    public string PhoneNumber
+    {
+        get => phoneNumber;
+        set
+        {
+            phoneNumber = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private string address;
+    public string Address
+    {
+        get => address;
+        set
+        {
+            address = value;
+            OnPropertyChanged();
+        }
+    }
 
     public bool IsNew { get; set; } = true;
+
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+    public void OnPropertyChanged(string? name = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    }
 }
