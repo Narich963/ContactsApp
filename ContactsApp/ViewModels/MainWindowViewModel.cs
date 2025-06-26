@@ -29,7 +29,7 @@ public class MainWindowViewModel : INotifyPropertyChanged
         LoadContactsAsync();
     }
 
-    private async Task LoadContactsAsync()
+    public async Task LoadContactsAsync()
     {
         try
         {

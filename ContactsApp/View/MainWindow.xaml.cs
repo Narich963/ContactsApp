@@ -1,11 +1,8 @@
-﻿using ContactsApp.Data_Access;
-using ContactsApp.Models;
+﻿using ContactsApp.Models;
 using ContactsApp.Services;
 using ContactsApp.View;
 using ContactsApp.ViewModels;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace ContactsApp;
 
@@ -33,6 +30,8 @@ public partial class MainWindow : Window
             DataContext = viewModel
         };
 
+        viewModel.ContactSaved += OnContactSaved;
+
         NavigationService.NavigateTo(window);
     }
     public void EditContact_Click(object sender, RoutedEventArgs e)
@@ -55,6 +54,7 @@ public partial class MainWindow : Window
             Address = selected.Address,
             IsNew = false
         };
+        viewModel.ContactSaved += OnContactSaved;
 
         var window = new AddOrEdit
         {
@@ -62,7 +62,7 @@ public partial class MainWindow : Window
         };
         NavigationService.NavigateTo(window);
     }
-    public void DeleteContact_Click(object sender, RoutedEventArgs e)
+    public async void DeleteContact_Click(object sender, RoutedEventArgs e)
     {
         var selected = ContactsList.SelectedValue as Contact;
         if (selected == null)
@@ -70,6 +70,18 @@ public partial class MainWindow : Window
             MessageBox.Show(NoSelectedContactError, ErrorTitle);
             return;
         }
-        _contactService.DeleteAsync(selected.Id);
+        await _contactService.DeleteAsync(selected.Id);
+
+        if (DataContext is MainWindowViewModel mainVM)
+        {
+            await mainVM.LoadContactsAsync();
+        }
+    }
+
+    public async void OnContactSaved(object sender, EventArgs e)
+    {
+        if (DataContext is MainWindowViewModel mainVM)
+            await mainVM.LoadContactsAsync();
+        NavigationService.NavigateBack();
     }
 }

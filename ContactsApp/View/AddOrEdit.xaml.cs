@@ -32,9 +32,9 @@ public partial class AddOrEdit : Window
         base.OnClosed(e);
     }
 
-    public void CreateButton_Click(object sender, RoutedEventArgs e)
+    public async void CreateButton_Click(object sender, RoutedEventArgs e)
     {
-        ((AddOrEditContactViewModel)this.DataContext).SaveAsync();
+        await ((AddOrEditContactViewModel)this.DataContext).SaveAsync();
         NavigationService.NavigateBack();
     }
 }

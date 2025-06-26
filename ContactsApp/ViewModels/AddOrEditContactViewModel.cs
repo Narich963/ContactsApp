@@ -25,9 +25,11 @@ public class AddOrEditContactViewModel : INotifyPropertyChanged
         }
     }
 
+    public EventHandler ContactSaved;
     public async Task SaveAsync()
     {
         await _contactService.AddOrEditAsync(Contact);
+        ContactSaved?.Invoke(this, EventArgs.Empty);
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
